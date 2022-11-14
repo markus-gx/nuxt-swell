@@ -88,3 +88,6 @@ const count = response.count
 * Run `npm run dev:prepare` to generate type stubs
 * Use `npm run dev` to start playground in development mode.
 
+## Credits
+- [Gus](https://github.com/gusfune) for kicking of the DefinitelyTyped swell-js package
+- [Jakub](https://github.com/Baroshem) for reviewing and giving me hints for my first nuxt module 😉
