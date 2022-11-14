@@ -20,15 +20,19 @@ npm i nuxt-swell # npm
 
 Inside your `nuxt.config.ts` you just need to add the following piece of code and enter the credentials of your store to make everything work out of the box.
 
-```js
-modules: [
-  "nuxt-swell"
-],
-swell: {
-  storeId: "YOUR_STORE_ID",
-  apiKey: "YOUR_PUBLIC_ACCESS_TOKEN",
-  useCamelCase: true //Default is true change it to false to switch to snake_case responses
-}
+```ts
+export default defineNuxtConfig({
+  modules: [
+    "nuxt-swell"
+  ],
+  swell: {
+    storeId: "YOUR_STORE_ID",
+    apiKey: "YOUR_PUBLIC_ACCESS_TOKEN",
+    options: { // optional
+      useCamelCase: true // Default is true change it to false to switch to snake_case responses 
+    }
+  }
+})
 ```
 
 ### Composables
