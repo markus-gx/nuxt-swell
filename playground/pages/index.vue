@@ -3,7 +3,7 @@
     <h1>@nuxtjs/swell Playground</h1>
     <h2>Async Products Test</h2>
     <ul>
-      <li v-for="p in products" :key="p.id">
+      <li v-for="p in list.results" :key="p.id">
         <nuxt-link :to="`/products/${p.slug}/`">
           {{ p.name }}
         </nuxt-link>
@@ -13,6 +13,9 @@
 </template>
 
 <script setup>
-import getProductsAsync from '../../dist/runtime/composables/getProductsAsync'
-const products = await getProductsAsync('all', {})
+import { useAsyncData } from 'nuxt/app'
+import useSwellProducts from '../../dist/runtime/composables/useSwellProducts'
+
+const { list, fetch } = await useSwellProducts('first-page')
+await useAsyncData('first-page', async () => await fetch())
 </script>

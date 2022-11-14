@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import { fileURLToPath } from 'url'
-import { defineNuxtModule, addPlugin, addImportsDir, useNuxt } from '@nuxt/kit'
+import { defineNuxtModule, addPlugin, addImportsDir } from '@nuxt/kit'
 import { InitOptions } from 'swell-js'
 
 export interface ModuleOptions extends InitOptions{

@@ -46,39 +46,43 @@ const swell = useSwell()
 </script>
 ```
 
-#### Async Product Fetch
+#### Fetch A Single Product
 
-To retrieve a certrain product by `id` or `slug` and fetch it async with Nuxt 3 `useAsyncData` you can just call
+To retrieve a certain product by `id` or `slug` and fetch it async with Nuxt 3 `useAsyncData` you can just call
 
 ```vue
 <script lang="ts" setup>
-const myProduct = await getProductAsync("your_slug or id")
+const { product, fetch } = await useSwellProduct("Your Product Name or id")
+await useAsyncData("Your Product Name or id", async () => await fetch())
 </script>
 ```
+Everything else is handled by the composable, it just returns you the result as `ComputedRef` and a fetch method to actually fetch the product.
 
-This module is handling everything else and returns just the Product for use.
-
-#### Async Products Fetch
+#### Fetch A Product List
 Same goes for fetching multiple Products at once.
-Enter your desired `key` as parameter to make the result available accross your Nuxt 3 Application with ease and
-pass optional `options` like a SearchQuery as second parameter.
+Enter your desired `key` as parameter to make the result available across your Nuxt 3 Application with ease and
+pass optional `options` like a SearchQuery as `fetch()` parameter.
 
-You will receive a `ListResult<Product>` as return value.
+You can destructure this composable as well and receive a `list` object and a `fetch` method. Where you can access your products
+after fetching by just using `list.results`. 
 
 ```vue
-<script lang="ts" setup>
-//Example options, you can leave it blank too.
-const response = await getProductsAsync("individual key", {
+<template>
+  <p>Products Count: {{list.count}}</p>
+  <ul>
+    <li v-for="p in list.results" :key="p.id">
+      {{ p.name }}
+    </li>
+  </ul>
+</template>
+
+<script setup>
+const { result, fetch } = await useSwellProducts('first-page')
+await useAsyncData('first-page', async () => await fetch({
   limit: 25,
   page: 1
   expand: ['product.variants']
-})
-
-//access a list of products
-const products = response.results
-
-//see how many results are available when fetching more pages
-const count = response.count
+}))
 </script>
 ```
 

@@ -1,11 +1,16 @@
 <template>
   <div>
-    <h1>Product: {{ product.name }}</h1>
-    <img :src="product.images[0].file.url" width="250">
+    <h1>Product: {{ product?.name }}</h1>
+    <img :src="product?.images[0].file.url" width="250">
   </div>
 </template>
 
 <script setup lang="ts">
-const productName = useRoute().params.slug
-const product = await getProductAsync(productName as string)
+import { useAsyncData, useRoute } from '#app'
+import { useSwellProduct } from '#imports'
+
+const productName = useRoute().params.slug as string
+const { product, fetch } = await useSwellProduct(productName)
+
+await useAsyncData(productName, async () => await fetch())
 </script>
