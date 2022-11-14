@@ -3,7 +3,8 @@
 
 name: Node.js Package
 
-on:
+on: 
+  workflow_dispatch:
   release:
     types: [created]
 
