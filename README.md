@@ -11,7 +11,7 @@ providing client-safe access to store and customer data.
 - TypeScript Support
 
 ## Setup
-```
+```shell
 yarn add nuxt-swell # yarn
 npm i nuxt-swell # npm
 ```
@@ -35,8 +35,8 @@ swell: {
 This modules consits of the following composables to make your life easier 😉
 
 #### Use the Swell.JS SDK
-Inside your setup function you can just call the composable `useSwell()` and next to first class typescript support you are able to call all  
-available functions from the Swell.js SDK.
+Inside your setup function you can just call the composable `useSwell()` and next to first class typescript support,
+you are able to call allavailable functions from the Swell.js SDK.
 
 📖  [View Swell.js Documentation for basic usage](https://developers.swell.is/frontend-api/)
 
