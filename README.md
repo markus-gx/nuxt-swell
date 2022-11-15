@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     storeId: "YOUR_STORE_ID",
     apiKey: "YOUR_PUBLIC_ACCESS_TOKEN",
     options: { // optional
-      useCamelCase: true // Default is true change it to false to switch to snake_case responses 
+      useCamelCase: true // Default is false change it to true to switch to camelCase responses 
     }
   }
 })

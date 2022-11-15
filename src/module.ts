@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import { fileURLToPath } from 'url'
-import { defineNuxtModule, addPlugin, addImportsDir } from '@nuxt/kit'
+import { defineNuxtModule, addPlugin, addImportsDir, extendViteConfig } from '@nuxt/kit'
 import { InitOptions } from 'swell-js'
 
 export interface ModuleOptions {
@@ -34,6 +34,13 @@ export default defineNuxtModule<ModuleOptions>({
       options: { ...moduleOptions.options }
     }
     addImportsDir(resolve(runtimeDir, 'composables'))
-    console.info('[🚀] @nuxtjs/swell launched successfully.')
+    extendViteConfig((config) => {
+      config.optimizeDeps = {
+        include: ['lodash/camelCase', 'lodash/cloneDeep', 'deepmerge', 'lodash/find', 'lodash/findIndex', 'lodash/get',
+          'lodash/isEqual', 'object-keys-normalizer', 'lodash/round', 'lodash/set', 'lodash/snakeCase', 'qs', 'lodash/uniq',
+          'lodash/isEmpty', 'lodash/map', 'lodash/reduce', 'lodash/toLower', 'lodash/toNumber']
+      }
+    })
+    console.info('[🚀]nuxt-swell launched successfully.')
   }
 })

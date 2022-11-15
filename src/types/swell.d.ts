@@ -75,7 +75,7 @@ export interface Swell{
     tokenize(input: object): void,
   },
   products: {
-    get(productId: string): Promise<Product>,
+    get(productId: string, options: Query): Promise<Product>,
     list(input: Query | SearchQuery): Promise<ListResult<Product>>,
     variation(productId: string, options: CartOption): Promise<Product>,
   },
