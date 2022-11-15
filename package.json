@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "url": "https://github.com/markus-gx/nuxt-swell"
+  },
+  "keywords": ["nuxt", "vue", "swell", "ecommerce"],
   "exports": {
     ".": {
       "import": "./dist/module.mjs",
