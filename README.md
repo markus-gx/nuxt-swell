@@ -81,7 +81,7 @@ after fetching by just using `list.results`.
 </template>
 
 <script setup>
-const { result, fetch } = await useSwellProducts('first-page')
+const { list, fetch } = await useSwellProducts('first-page')
 await useAsyncData('first-page', async () => await fetch({
   limit: 25,
   page: 1
