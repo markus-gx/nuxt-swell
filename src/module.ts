@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url'
 import { defineNuxtModule, addPlugin, addImportsDir } from '@nuxt/kit'
 import { InitOptions } from 'swell-js'
 
-export interface ModuleOptions{
+export interface ModuleOptions {
   storeId?: string,
   apiKey?: string
   options?: InitOptions
@@ -16,10 +16,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {
     storeId: undefined,
-    apiKey: undefined,
-    options: {
-      useCamelCase: true
-    }
+    apiKey: undefined
   },
   setup (moduleOptions: ModuleOptions, nuxt) {
     if (!moduleOptions.apiKey) {
@@ -34,7 +31,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.runtimeConfig.public.swell = {
       storeId: moduleOptions.storeId,
       apiKey: moduleOptions.apiKey,
-      options: moduleOptions.options
+      options: { ...moduleOptions.options }
     }
     addImportsDir(resolve(runtimeDir, 'composables'))
     console.info('[🚀] @nuxtjs/swell launched successfully.')
