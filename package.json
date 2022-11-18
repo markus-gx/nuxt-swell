@@ -6,7 +6,12 @@
   "repository": {
     "url": "https://github.com/markus-gx/nuxt-swell"
   },
-  "keywords": ["nuxt", "vue", "swell", "ecommerce"],
+  "keywords": [
+    "nuxt",
+    "vue",
+    "swell",
+    "ecommerce"
+  ],
   "exports": {
     ".": {
       "import": "./dist/module.mjs",
@@ -25,15 +30,15 @@
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.0.0-rc.13",
+    "@nuxt/kit": "^3.0.0",
     "swell-js": "^3.17.10"
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.2.0",
-    "@nuxt/schema": "^3.0.0-rc.13",
+    "@nuxt/schema": "^3.0.0",
     "@nuxtjs/eslint-config-typescript": "^11.0.0",
-    "@types/swell-js": "^3.17.1",
+    "@types/swell-js": "^3.17.3",
     "eslint": "^8.26.0",
-    "nuxt": "^3.0.0-rc.13"
+    "nuxt": "^3.0.0"
   }
 }

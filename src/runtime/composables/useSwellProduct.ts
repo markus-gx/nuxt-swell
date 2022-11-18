@@ -5,7 +5,7 @@ import useSwell from './useSwell'
 
 export type UseProductReturnType = {
   product: ComputedRef<Product | null>,
-  fetch: () => Promise<Product>
+  fetch: (options: Query) => Promise<Product>
 }
 export default function (productId: string): UseProductReturnType {
   const result = useState<Product | null>(productId, () => null)
