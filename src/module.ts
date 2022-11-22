@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { fileURLToPath } from 'url'
 import { defineNuxtModule, addPlugin, addImportsDir, extendViteConfig } from '@nuxt/kit'
-import { InitOptions } from 'swell-js'
+import { InitOptions } from './types/swell-js'
 
 export interface ModuleOptions {
   storeId?: string,

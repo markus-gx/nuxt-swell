@@ -694,11 +694,6 @@
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.3.13.tgz#da4bfd73f49bd541d28920ab0e2bf0ee80f71c91"
   integrity sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==
 
-"@types/swell-js@^3.17.3":
-  version "3.17.3"
-  resolved "https://registry.yarnpkg.com/@types/swell-js/-/swell-js-3.17.3.tgz#0b1f5713d0ff7ffde7e275b13e8352e3a2016f9f"
-  integrity sha512-AJjaBCh4MnTxJfj4i8fHbfV15YznrINg0WIynIqF1Z3XDzsqd02Jva+79FPLvKp2wYOMOvCJ3Zt012BEvncLVQ==
-
 "@typescript-eslint/eslint-plugin@^5.36.1":
   version "5.43.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.43.0.tgz#4a5248eb31b454715ddfbf8cfbf497529a0a78bc"

@@ -37,7 +37,6 @@
     "@nuxt/module-builder": "^0.2.0",
     "@nuxt/schema": "^3.0.0",
     "@nuxtjs/eslint-config-typescript": "^11.0.0",
-    "@types/swell-js": "^3.17.3",
     "eslint": "^8.26.0",
     "nuxt": "^3.0.0"
   }
