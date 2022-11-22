@@ -90,6 +90,23 @@ await useAsyncData('first-page', async () => await fetch({
 </script>
 ```
 
+#### Fetch All Categories
+To fetch all categories from swell just destructure the composable and use the result or `categories` as `ComputedRef`. 
+
+```vue
+<ul>
+  <li v-for="c in categories" :key="c.id">
+    {{ c.name }}
+  </li>
+</ul>
+
+<script setup>
+const { categories, fetchCategories } = useSwellCategories()
+await useAsyncData('categories', async () => await fetchCategories())
+</script>
+```
+
+
 **And more to come soon!**
 
 ## Development

@@ -9,13 +9,24 @@
         </nuxt-link>
       </li>
     </ul>
+    <hr>
+    <h2>Categories test</h2>
+    <ul>
+      <li v-for="c in categories" :key="c.id">
+        {{ c.name }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup>
 import { useAsyncData } from 'nuxt/app'
 import useSwellProducts from '../../dist/runtime/composables/useSwellProducts'
+import useSwellCategories from '../../dist/runtime/composables/useSwellCategories'
 
-const { list, fetch } = await useSwellProducts('first-page')
+const { list, fetch } = useSwellProducts('first-page')
 await useAsyncData('first-page', async () => await fetch())
+
+const { categories, fetchCategories } = useSwellCategories()
+await useAsyncData('categories', async () => await fetchCategories())
 </script>

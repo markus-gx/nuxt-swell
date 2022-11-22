@@ -1,9 +1,14 @@
 import { useState } from '#app'
-import { computed } from 'vue'
+import { computed, ComputedRef } from 'vue'
 import { Category } from '../../types/swell-js'
 import useSwell from './useSwell'
 
-export default function () {
+export type UseCategoriesReturnType = {
+  categories: ComputedRef<Category[]>,
+  fetchCategories: () => Promise<Category[]>
+}
+
+export default function (): UseCategoriesReturnType {
   const result = useState<Category[]>('categories', () => [])
 
   const fetch = async (): Promise<Category[]> => {
@@ -14,6 +19,6 @@ export default function () {
 
   return {
     categories: computed(() => result.value),
-    fetch
+    fetchCategories: fetch
   }
 }
