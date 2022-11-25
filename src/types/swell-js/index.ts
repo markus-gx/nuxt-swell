@@ -4,8 +4,6 @@
 //                 Markus <https://github.com/markus-gx>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-export as namespace swell;
-
 export interface Query {
   limit?: number;
   page?: number;
@@ -496,102 +494,96 @@ export interface Attribute {
   visible: boolean;
 }
 
-export function init(storeId: string, publicKey: string, options?: InitOptions): void;
-
-export function get(url: string, query: object): Promise<unknown>;
-export function put(url: string, query: object): Promise<unknown>;
-export function post(url: string, query: object): Promise<unknown>;
-
-export namespace account {
-  function create(input: CreateAccountInput): Promise<unknown>;
-  function createAddress(input: AddressWithContact): Promise<AddressWithContact>;
-  function createCard(input: object): Promise<unknown>;
-  function deleteAddress(id: string): Promise<unknown>;
-  function deleteCard(id: string): Promise<unknown>;
-  function get(): Promise<unknown>;
-  function getAddresses({}): Promise<unknown>;
-  function getOrder(id?: string): Promise<unknown>;
-  function listAddresses(): Promise<unknown>;
-  function listCards(): Promise<unknown>;
-  function listOrders(input: object): Promise<unknown>;
-  function login(user: string, password: string): Promise<unknown>;
-  function logout(): Promise<unknown>;
-  function recover(input: object): Promise<unknown>;
-  function update(input: object): Promise<unknown>;
-  function updateCard(input: object): Promise<unknown>;
-  function updateAddress(id: string, data: Address): Promise<AddressWithContact>;
+export interface account {
+  create(input: CreateAccountInput): Promise<unknown>;
+  createAddress(input: AddressWithContact): Promise<AddressWithContact>;
+  createCard(input: object): Promise<unknown>;
+  deleteAddress(id: string): Promise<unknown>;
+  deleteCard(id: string): Promise<unknown>;
+  get(): Promise<unknown>;
+  getAddresses(): Promise<unknown>;
+  getOrder(id?: string): Promise<unknown>;
+  listAddresses(): Promise<unknown>;
+  listCards(): Promise<unknown>;
+  listOrders(input: object): Promise<unknown>;
+  login(user: string, password: string): Promise<unknown>;
+  logout(): Promise<unknown>;
+  recover(input: object): Promise<unknown>;
+  update(input: object): Promise<unknown>;
+  updateCard(input: object): Promise<unknown>;
+  updateAddress(id: string, data: Address): Promise<AddressWithContact>;
 }
 
-export namespace attributes {
-  function get(input: string): Promise<Attribute>;
-  function get(): Promise<ListResult<Attribute>>;
-  function list(input: Query): Promise<ListResult<Attribute>>;
+export interface attributes {
+  get(input: string): Promise<Attribute>;
+  get(): Promise<ListResult<Attribute>>;
+  list(input: Query): Promise<ListResult<Attribute>>;
 }
 
-export namespace card {
-  function createToken(input: object): Promise<unknown>;
-  function validateCVC(input: string): boolean;
-  function validateExpiry(input: string): boolean;
-  function validateNumber(input: string): boolean;
+export interface card {
+  createToken(input: object): Promise<unknown>;
+  validateCVC(input: string): boolean;
+  validateExpiry(input: string): boolean;
+  validateNumber(input: string): boolean;
 }
 
-export namespace cart {
-  function addItem(input: CartInput): Promise<Cart>;
-  function applyCoupon(input: string): Promise<Cart>;
-  function applyGiftcard(input: string): Promise<Cart>;
-  function get(): Promise<Cart>;
-  function getSettings(): Promise<unknown>;
-  function removeCoupon(): Promise<Cart>;
-  function removeGiftcard(itemId: string): Promise<Cart>;
-  function removeItem(itemId: string): Promise<Cart>;
-  function setItems(input: CartInput[]): Promise<Cart>;
-  function submitOrder(): Promise<Order>;
-  function update(input: any): Promise<Cart>;
-  function updateItem(itemId: string, input: any): Promise<Cart>;
+export interface cart {
+  addItem(input: CartInput): Promise<Cart>;
+  applyCoupon(input: string): Promise<Cart>;
+  applyGiftcard(input: string): Promise<Cart>;
+  get(): Promise<Cart>;
+  getSettings(): Promise<unknown>;
+  removeCoupon(): Promise<Cart>;
+  removeGiftcard(itemId: string): Promise<Cart>;
+  removeItem(itemId: string): Promise<Cart>;
+  setItems(input: CartInput[]): Promise<Cart>;
+  submitOrder(): Promise<Order>;
+  update(input: any): Promise<Cart>;
+  updateItem(itemId: string, input: any): Promise<Cart>;
 }
 
-export namespace categories {
-  function get(input: string): Promise<Category>;
-  function get(): Promise<ListResult<Category>>;
-  function list(input: object): Promise<ListResult<Category>>;
+export interface categories {
+  get(input: string): Promise<Category>;
+  get(): Promise<ListResult<Category>>;
+  list(input: object): Promise<ListResult<Category>>;
 }
 
-export namespace currency {
-  function format(input: number, format: object): string;
-  function list(): Promise<ListResult<unknown>>;
-  function select(input: string): Promise<unknown>;
-  function selected(): Promise<string>;
+export interface currency {
+  format(input: number, format: object): string;
+  list(): Promise<ListResult<unknown>>;
+  select(input: string): Promise<unknown>;
+  selected(): Promise<string>;
 }
 
-export namespace locale {
-  function selected(): Promise<string>;
-  function select(locale: string): Promise<unknown>;
+export interface locale {
+  selected(): Promise<string>;
+  select(locale: string): Promise<unknown>;
 }
 
-export namespace payment {
-  function createElements(input: object): Promise<unknown>;
-  function tokenize(input: object): void;
+export interface payment {
+  createElements(input: object): Promise<unknown>;
+  tokenize(input: object): void;
 }
 
-export namespace products {
-  function get(productId: string): Promise<Product>;
-  function list(input: ProductQuery): Promise<ListResult<Product>>;
-  function variation(productId: string, options: CartOption): Promise<Product>;
+export interface products {
+  get(productId: string): Promise<Product>;
+  list(input: ProductQuery): Promise<ListResult<Product>>;
+  variation(productId: string, options: CartOption): Promise<Product>;
 }
 
-export namespace settings {
-  function get(): Promise<unknown>;
-  function load(): Promise<unknown>;
-  function menus(input?: string): Promise<unknown>;
-  function payments(): Promise<unknown>;
+export interface settings {
+  get(): Promise<unknown>;
+  load(): Promise<unknown>;
+  menus(input?: string): Promise<unknown>;
+  payments(): Promise<unknown>;
 }
 
-export namespace subscriptions {
-  function addItem(id: string, input: object): Promise<unknown>;
-  function create(input: object): Promise<unknown>;
-  function get(id: string): Promise<unknown>;
-  function list(): Promise<ListResult<unknown>>;
-  function removeItem(id: string, itemId: string): Promise<unknown>;
-  function update(id: string, input: object): Promise<unknown>;
-  function updateItem(id: string, itemId: string, input: any): Promise<unknown>;
+export interface subscriptions {
+  addItem(id: string, input: object): Promise<unknown>;
+  create(input: object): Promise<unknown>;
+  get(id: string): Promise<unknown>;
+  list(): Promise<ListResult<unknown>>;
+  removeItem(id: string, itemId: string): Promise<unknown>;
+  update(id: string, input: object): Promise<unknown>;
+  updateItem(id: string, itemId: string, input: any): Promise<unknown>;
 }

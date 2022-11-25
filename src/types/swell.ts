@@ -1,6 +1,6 @@
 import {
   Address, AddressWithContact, Attribute, Cart, CartInput, CartOption,
-  Category, CreateAccountInput, ListResult, Order, Product, ProductQuery,
+  Category, CreateAccountInput, InitOptions, ListResult, Order, Product, ProductQuery,
   Query
 } from './swell-js'
 
@@ -8,6 +8,10 @@ import {
  * Override namepsace swell to make composables typed.
  */
 export interface Swell {
+  init(storeId: string, publicKey: string, options?: InitOptions): void
+  get(url: string, query: object): Promise<unknown>
+  put(url: string, query: object): Promise<unknown>
+  post(url: string, query: object): Promise<unknown>
   account: {
     create(input: CreateAccountInput): Promise<unknown>;
     createAddress(input: AddressWithContact): Promise<AddressWithContact>;
