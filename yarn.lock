@@ -450,7 +450,7 @@
     unimport "^1.0.1"
     untyped "^1.0.0"
 
-"@nuxt/module-builder@^0.2.0":
+"@nuxt/module-builder@^0.2.1":
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/@nuxt/module-builder/-/module-builder-0.2.1.tgz#e74539b8cb97fc4dfa66cde74e7ceb68dc1832cb"
   integrity sha512-Om8q08CO2joxiv9piTL+jcFUAL7nOZrrq9DedbA0PoRww1It1UnRs3Mijp0MfkFNyGHwWbSbmvbo3EhWmGdWUg==
