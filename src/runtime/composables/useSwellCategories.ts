@@ -1,6 +1,6 @@
 import { useState } from '#app'
 import { computed, ComputedRef } from 'vue'
-import { Category } from '../../types/swell-js'
+import { Category } from 'swell-js'
 import useSwell from './useSwell'
 
 export type UseCategoriesReturnType = {

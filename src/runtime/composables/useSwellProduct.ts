@@ -1,6 +1,6 @@
 import { useState } from '#app'
 import { computed, ComputedRef } from 'vue'
-import { Product, Query } from '../../types/swell-js'
+import { Product, Query } from 'swell-js'
 import useSwell from './useSwell'
 
 export type UseProductReturnType = {

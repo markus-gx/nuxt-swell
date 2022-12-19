@@ -1,12 +1,20 @@
-import {
-  Address, AddressWithContact, Attribute, Cart, CartInput, CartOption,
-  Category, CreateAccountInput, InitOptions, ListResult, Order, Product, ProductQuery,
-  Query
-} from './swell-js'
-
 /**
  * Override namepsace swell to make composables typed.
  */
+import {
+  Address,
+  AddressWithContact,
+  Attribute, Cart,
+  CartInput, CartOption, Category,
+  CreateAccountInput,
+  InitOptions,
+  ListResult, Order, Product, ProductQuery,
+  Query, ShippingRates
+} from 'swell-js'
+import { Currency, CurrencySelect } from 'swell-js/currency'
+import { Locale } from 'swell-js/locale'
+import { Settings } from 'swell-js/settings'
+
 export interface Swell {
   init(storeId: string, publicKey: string, options?: InitOptions): void
   get(url: string, query: object): Promise<unknown>
@@ -19,8 +27,8 @@ export interface Swell {
     deleteAddress(id: string): Promise<unknown>;
     deleteCard(id: string): Promise<unknown>;
     get(): Promise<unknown>;
-    getAddresses(): Promise<unknown>;
-    getOrder(id?: string): Promise<unknown>;
+    getAddresses({}): Promise<unknown>;
+    getOrder(id?: string): Promise<Order>;
     listAddresses(): Promise<unknown>;
     listCards(): Promise<unknown>;
     listOrders(input: object): Promise<unknown>;
@@ -48,6 +56,7 @@ export interface Swell {
     applyGiftcard(input: string): Promise<Cart>;
     get(): Promise<Cart>;
     getSettings(): Promise<unknown>;
+    getShippingRates(): Promise<ShippingRates>;
     removeCoupon(): Promise<Cart>;
     removeGiftcard(itemId: string): Promise<Cart>;
     removeItem(itemId: string): Promise<Cart>;
@@ -63,13 +72,13 @@ export interface Swell {
   }
   currency: {
     format(input: number, format: object): string;
-    list(): Promise<ListResult<unknown>>;
-    select(input: string): Promise<unknown>;
-    selected(): Promise<string>;
+    list(): Promise<Currency[]>;
+    select(input: string): Promise<CurrencySelect>;
+    selected(): string;
   }
   locale: {
-    selected(): Promise<string>;
-    select(locale: string): Promise<unknown>;
+    selected(): string;
+    select(locale: string): Promise<Locale>;
   }
   payment: {
     createElements(input: object): Promise<unknown>;
@@ -81,7 +90,7 @@ export interface Swell {
     variation(productId: string, options: CartOption): Promise<Product>;
   }
   settings: {
-    get(): Promise<unknown>;
+    get(): Promise<Settings>;
     load(): Promise<unknown>;
     menus(input?: string): Promise<unknown>;
     payments(): Promise<unknown>;
