@@ -1,16 +1,17 @@
 import { useState } from '#app'
 import type { ComputedRef } from 'vue'
 import { computed } from 'vue'
-import { ListResult, Product, Query, SearchQuery } from 'swell-js'
+import { Product } from 'swell-js/types/product'
+import { Query, SearchQuery, ResultsResponse } from '../../types/swell-extended'
 import useSwell from './useSwell'
 
 export type UseProductsReturnType = {
-  list: ComputedRef<ListResult<Product>>,
-  fetch: (options: Query | SearchQuery) => Promise<ListResult<Product>>
+  list: ComputedRef<ResultsResponse<Product>>,
+  fetch: (options: Query | SearchQuery) => Promise<ResultsResponse<Product>>
 }
 
 export default function (key: string): UseProductsReturnType {
-  const result = useState<ListResult<Product>>(key, () => ({
+  const result = useState<ResultsResponse<Product>>(key, () => ({
     count: 0,
     results: [],
     page: -1

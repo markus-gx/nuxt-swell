@@ -11,6 +11,5 @@ import { useSwellProduct } from '#imports'
 
 const productName = useRoute().params.slug as string
 const { product, fetch } = await useSwellProduct(productName)
-
 await useAsyncData(productName, async () => await fetch())
 </script>

@@ -1,107 +1,172 @@
-/**
- * Override namepsace swell to make composables typed.
- */
+import { Account, Address, PasswordTokenInput } from 'swell-js/types/account'
+import { Card, InputCreateToken, TokenResponse } from 'swell-js/types/card'
+import { Order } from 'swell-js/types/order'
+import { Attribute } from 'swell-js/types/attribute'
+import { Cart, CartItem } from 'swell-js/types/cart'
+import { Settings } from 'swell-js/types/settings'
+import { Category } from 'swell-js/types/category'
+import { EnabledCurrency, FormatInput, SelectCurrencyReturn } from 'swell-js/types/currency'
+import { Locale } from 'swell-js/types/locale'
 import {
-  Address,
-  AddressWithContact,
-  Attribute, Cart,
-  CartInput, CartOption, Category,
-  CreateAccountInput,
-  InitOptions,
-  ListResult, Order, Product, ProductQuery,
-  Query, ShippingRates
-} from 'swell-js'
-import { Currency, CurrencySelect } from 'swell-js/currency'
-import { Locale } from 'swell-js/locale'
-import { Settings } from 'swell-js/settings'
+  InputPaymentElementCard,
+  InputPaymentElementIdeal,
+  InputPaymentElementPaypal, InputPaymentRedirect,
+  Payment
+} from 'swell-js/types/payment'
+import { FlexibleProductInput, PriceRange, Product } from 'swell-js/types/product'
+import { Subscription } from 'swell-js/types/subscription'
+import { InitOptions, ResultsResponse } from './swell-extended'
 
 export interface Swell {
-  init(storeId: string, publicKey: string, options?: InitOptions): void
-  get(url: string, query: object): Promise<unknown>
-  put(url: string, query: object): Promise<unknown>
-  post(url: string, query: object): Promise<unknown>
+  init (storeId: string, publicKey: string, options?: InitOptions): void
+
+  get (url: string, query: object): Promise<unknown>
+
+  put (url: string, query: object): Promise<unknown>
+
+  post (url: string, query: object): Promise<unknown>
+
   account: {
-    create(input: CreateAccountInput): Promise<unknown>;
-    createAddress(input: AddressWithContact): Promise<AddressWithContact>;
-    createCard(input: object): Promise<unknown>;
-    deleteAddress(id: string): Promise<unknown>;
-    deleteCard(id: string): Promise<unknown>;
-    get(): Promise<unknown>;
-    getAddresses({}): Promise<unknown>;
-    getOrder(id?: string): Promise<Order>;
-    listAddresses(): Promise<unknown>;
-    listCards(): Promise<unknown>;
-    listOrders(input: object): Promise<unknown>;
-    login(user: string, password: string): Promise<unknown>;
-    logout(): Promise<unknown>;
-    recover(input: object): Promise<unknown>;
-    update(input: object): Promise<unknown>;
-    updateCard(input: object): Promise<unknown>;
-    updateAddress(id: string, data: Address): Promise<AddressWithContact>;
+    create (input: Account): Promise<Account>;
+    createAddress (input: Address): Promise<Address>;
+    createCard (input: Card): Promise<Card>;
+    deleteAddress (id: string): Promise<Address>;
+    deleteCard (id: string): Promise<Card>;
+    get (): Promise<Account>;
+    getAddresses (input: object): Promise<Address>;
+    getCards (input: object): Promise<Card[]>;
+    getOrder (id: string): Promise<Order>;
+    getOrders (): ResultsResponse<Promise<Order>>;
+    listAddresses (): Promise<Address[]>;
+    listCards (): Promise<Card[]>;
+    listOrders (input?: object): ResultsResponse<Promise<Order>>;
+    login (
+      user: string,
+      password: string | PasswordTokenInput,
+    ): Promise<Account | null>;
+    logout (): Promise<unknown>;
+    recover (input: object): Promise<Account>;
+    update (input: Account): Promise<Account>;
+    updateAddress (id: string, input: Address): Promise<Address>;
   }
   attributes: {
-    get(input: string): Promise<Attribute>;
-    get(): Promise<ListResult<Attribute>>;
-    list(input: Query): Promise<ListResult<Attribute>>;
+    get (input: string): Promise<Attribute>;
+    list (input?: object): Promise<ResultsResponse<Attribute>>;
+    get (): Promise<ResultsResponse<Attribute>>;
   }
   card: {
-    createToken(input: object): Promise<unknown>;
-    validateCVC(input: string): boolean;
-    validateExpiry(input: string): boolean;
-    validateNumber(input: string): boolean;
+    createToken (input: InputCreateToken): Promise<TokenResponse>;
+    validateCVC (input: string): boolean;
+    validateExpiry (input: string): boolean;
+    validateNumber (input: string): boolean;
   }
   cart: {
-    addItem(input: CartInput): Promise<Cart>;
-    applyCoupon(input: string): Promise<Cart>;
-    applyGiftcard(input: string): Promise<Cart>;
-    get(): Promise<Cart>;
-    getSettings(): Promise<unknown>;
-    getShippingRates(): Promise<ShippingRates>;
-    removeCoupon(): Promise<Cart>;
-    removeGiftcard(itemId: string): Promise<Cart>;
-    removeItem(itemId: string): Promise<Cart>;
-    setItems(input: CartInput[]): Promise<Cart>;
-    submitOrder(): Promise<Order>;
-    update(input: any): Promise<Cart>;
-    updateItem(itemId: string, input: any): Promise<Cart>;
+    addItem (input: CartItem): Promise<Cart>;
+    get (input?: string): Promise<Cart | null>;
+    getSettings (): Promise<Settings>;
+    getShippingRates (): Promise<object>; // TODO: add shipping Rate object
+    removeItem (input: string): Promise<Cart>;
+    recover (input: string): Promise<Cart>;
+    setItems (input: [CartItem]): Promise<Cart>;
+    updateItem (id: string, input: CartItem): Promise<Cart>;
+    update (input: object): Promise<Cart>;
   }
   categories: {
-    get(input: string): Promise<Category>;
-    get(): Promise<ListResult<Category>>;
-    list(input: object): Promise<ListResult<Category>>;
+    get (input: string): Promise<Category>;
+    list (input?: object): Promise<ResultsResponse<Category>>;
+    get (): Promise<ResultsResponse<Category>>;
   }
   currency: {
-    format(input: number, format: object): string;
-    list(): Promise<Currency[]>;
-    select(input: string): Promise<CurrencySelect>;
-    selected(): string;
+    format (input: number, format: FormatInput): string;
+    list (): Promise<Array<EnabledCurrency>>;
+    select (input: string): Promise<SelectCurrencyReturn>;
+    selected (): Promise<string>;
   }
   locale: {
-    selected(): string;
-    select(locale: string): Promise<Locale>;
+    get (): Promise<Locale>;
+    list (): Promise<Array<Locale>>;
+    selected (): Promise<string>;
+    select (locale: string): Promise<{ locale: string }>;
+    set (code: string): Promise<Locale>;
   }
   payment: {
-    createElements(input: object): Promise<unknown>;
-    tokenize(input: object): void;
+    authenticate (id: string): Promise<unknown>;
+    authorizeGateway (input: object): Promise<unknown>;
+    createElements (input: {
+      card?: InputPaymentElementCard;
+      paypal?: InputPaymentElementPaypal;
+      ideal?: InputPaymentElementIdeal;
+    }): Promise<unknown>;
+    createIntent (input: {
+      gateway: string;
+      intent: object;
+    }): Promise<unknown>;
+    get (input: string): Promise<Payment>;
+    handleRedirect (input: {
+      card?: InputPaymentRedirect;
+      paysafecard?: InputPaymentRedirect;
+      klarna?: InputPaymentRedirect;
+    }): Promise<unknown>;
+    tokenize (input: {
+      card?: object;
+      ideal?: object;
+      klarna?: object;
+      bancontact?: object;
+      paysafecard?: object;
+    }): Promise<unknown>;
+    updateIntent (input: {
+      gateway: string;
+      intent: object;
+    }): Promise<unknown>;
   }
   products: {
-    get(productId: string): Promise<Product>;
-    list(input: ProductQuery): Promise<ListResult<Product>>;
-    variation(productId: string, options: CartOption): Promise<Product>;
+    categories (
+      products: FlexibleProductInput,
+    ): Promise<ResultsResponse<Category>>;
+    filters (products: FlexibleProductInput): Promise<object[]>;
+    filterableAttributeFilters (
+      products: Array<Product>,
+      options?: object,
+    ): Array<Attribute>;
+    get (id: string, input?: object): Promise<Product>;
+    list (input?: object): Promise<ResultsResponse<Product>>;
+    priceRange (product: FlexibleProductInput): PriceRange;
+    variation (product: Product, options: object): Promise<Product>;
   }
   settings: {
-    get(): Promise<Settings>;
-    load(): Promise<unknown>;
-    menus(input?: string): Promise<unknown>;
-    payments(): Promise<unknown>;
+    get (
+      id?: string,
+      def?: string | number | Settings,
+    ): Promise<Settings>;
+    getCurrentLocale (): Promise<string>;
+    getStoreLocale (): Promise<string>;
+    getStoreLocales (): Promise<Array<string>>;
+    load (): Promise<Settings> | null;
+    menus (input?: string): Promise<Settings>;
+    payments (
+      id?: string,
+      def?: string | number | Settings,
+    ): Promise<Settings>;
+    subscriptions (
+      id?: string,
+      def?: string | number | Settings,
+    ): Promise<Settings>;
+    session (
+      id?: string,
+      def?: string | number | Settings,
+    ): Promise<Settings>;
   }
   subscriptions: {
-    addItem(id: string, input: object): Promise<unknown>;
-    create(input: object): Promise<unknown>;
-    get(id: string): Promise<unknown>;
-    list(): Promise<ListResult<unknown>>;
-    removeItem(id: string, itemId: string): Promise<unknown>;
-    update(id: string, input: object): Promise<unknown>;
-    updateItem(id: string, itemId: string, input: any): Promise<unknown>;
+    addItem (id: string, input: object): Promise<Subscription>;
+    create (input: object): Promise<Subscription>;
+    get (id: string): Promise<Subscription>;
+    list (): Promise<ResultsResponse<Subscription>>;
+    removeItem (id: string, itemId: string): Promise<unknown>;
+    update (id: string, input: object): Promise<Subscription>;
+    updateItem (
+      id: string,
+      itemId: string,
+      input: any,
+    ): Promise<Subscription>;
   }
 }
