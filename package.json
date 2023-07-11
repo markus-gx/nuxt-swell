@@ -30,14 +30,14 @@
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.0.0",
-    "swell-js": "^3.19.3"
+    "@nuxt/kit": "^3.6.2",
+    "swell-js": "^3.22.1"
   },
   "devDependencies": {
-    "@nuxt/module-builder": "^0.2.1",
-    "@nuxt/schema": "^3.0.0",
-    "@nuxtjs/eslint-config-typescript": "^11.0.0",
-    "eslint": "^8.26.0",
-    "nuxt": "^3.0.0"
+    "@nuxt/module-builder": "^0.4.0",
+    "@nuxt/schema": "^3.6.2",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "eslint": "^8.44.0",
+    "nuxt": "^3.6.2"
   }
 }
