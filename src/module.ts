@@ -37,7 +37,7 @@ export default defineNuxtModule<ModuleOptions>({
     extendViteConfig((config) => {
       config.optimizeDeps = {
         include: ['lodash/camelCase', 'lodash/cloneDeep', 'deepmerge', 'lodash/find', 'lodash/findIndex', 'lodash/get',
-          'lodash/isEqual', 'object-keys-normalizer', 'lodash/round', 'lodash/set', 'lodash/snakeCase', 'qs', 'lodash/uniq',
+          'lodash/isEqual', 'lodash/round', 'lodash/set', 'lodash/snakeCase', 'qs', 'lodash/uniq',
           'lodash/isEmpty', 'lodash/map', 'lodash/reduce', 'lodash/toLower', 'lodash/toNumber']
       }
     })
